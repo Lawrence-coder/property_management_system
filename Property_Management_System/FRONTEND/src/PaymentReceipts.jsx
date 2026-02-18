@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 
-const PaymentReceipts = () => {
+  const PaymentReceipts = () => {
   const [report, setReport] = useState([]);
   const [properties, setProperties] = useState([]); // State to hold properties list
   const [filters, setFilters] = useState({ 
     propertyId: "", 
-    month: new Date().getMonth() + 1, 
-    year: new Date().getFullYear() 
+    month: new Date().getMonth() + 1, // Default to current month (0-indexed, so add 1) which means January is 1, February is 2, etc.
+    year: new Date().getFullYear() // Default to current year.
   });
+  const [selectedReceipts, setSelectedReceipts] = useState(null);
 
   // 1. Fetch properties for the dropdown on mount
   useEffect(() => {
@@ -47,6 +48,8 @@ const PaymentReceipts = () => {
     fetchReport();
   }, [filters]); // Dependency array: re-run when filters change
 
+
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h2 className="text-2xl font-bold mb-4">Monthly Payment Status</h2>
@@ -55,7 +58,7 @@ const PaymentReceipts = () => {
       <div className="flex flex-wrap gap-4 mb-6 bg-white p-4 rounded shadow items-end">
         
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-bold text-gray-600">Property</label>
+          <label className="text-m font-bold text-gray-800">Property</label>
           <select 
             value={filters.propertyId}
             className="border p-2 rounded bg-gray-50"
@@ -69,7 +72,7 @@ const PaymentReceipts = () => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-bold text-gray-600">Month</label>
+          <label className="text-m font-bold text-gray-900">Month</label>
           <select 
             value={filters.month}
             className="border p-2 rounded bg-gray-50"
@@ -84,7 +87,7 @@ const PaymentReceipts = () => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-bold text-gray-600">Year</label>
+          <label className="text-m font-bold text-gray-900">Year</label>
           <input 
             type="number" 
             value={filters.year}
@@ -97,11 +100,11 @@ const PaymentReceipts = () => {
       {/* Report Table */}
       <div className="bg-white rounded shadow overflow-x-auto">
         <table className="w-full text-left border-collapse">
-          <thead className="bg-gray-800 text-white">
+          <thead className="bg-gray-900 text-white">
             <tr>
-              <th className="p-3">Full Name</th>
+              <th className="p-3">Full Names</th>
               <th className="p-3">Phone</th>
-              <th className="p-3">House</th>
+              <th className="p-3">House Number</th>
               <th className="p-3">Type</th>
               <th className="p-3">Rent (Ksh)</th>
               <th className="p-3">Status</th>
@@ -125,11 +128,13 @@ const PaymentReceipts = () => {
                   </span>
                 </td>
                 <td className="p-3">
-                  {item.receipt_path ? (
-                    <a href={`http://localhost:3000/src/Uploads/${item.receipt_path}`} target="_blank" rel="noreferrer" className="text-blue-600 underline">
-                      View Receipt
-                    </a>
-                  ) : "-"}
+
+                  <button
+                   onClick = {()=> setSelectedReceipts(item.receipt_path)}
+                   className ="text-blue-600 underline"
+                  >
+                    View Receipt
+                    </button>
                 </td>
                 <td className="p-3 uppercase text-xs font-bold text-gray-600">
                     {item.payment_status || "N/A"}
@@ -145,6 +150,32 @@ const PaymentReceipts = () => {
           </tbody>
         </table>
       </div>
+
+   {/*--------------This is the modal for view receipt-----------*/}
+  {selectedReceipts && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    
+    <div className="bg-white p-6 rounded shadow-lg max-w-2xl w-full relative">
+      
+      <button
+        onClick={() => setSelectedReceipts(null)}
+        className="absolute top-2 right-2 text-red-600 bg-red-100 p-2 font-bold"
+      >
+        X
+      </button>
+
+      <h3 className="text-lg font-bold mb-4 text-gray-900">Receipt Preview</h3>
+
+      <img
+        src={`http://localhost:3000/${selectedReceipts}`}
+        alt="Receipt"
+        className="w-full h-auto rounded"
+      />
+
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

@@ -42,7 +42,8 @@ app.use('/api/vacatingNotices', noticesRoutes);
 app.use('/api/addproperty', addPropertiesRoutes);
 app.use('/api/vacants', vacantsRoutes);
 app.use('/api/payments', PaymentReceiptsRoutes);
-app.use('/src/Uploads', express.static(path.join(__dirname, 'src/Uploads')));
+app.use('/src/Uploads', express.static(path.join(__dirname, 'Uploads')));
+
 
 //404 Handling Middleware- for routes that don't exist.
 app.use((req, res) => {

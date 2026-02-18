@@ -5,6 +5,5 @@ import { fetchMonthlyReport } from '../controllers/paymentReceipts.Controllers.j
 const router = express.Router();
 
 router.get('/monthly-report', protect, fetchMonthlyReport);
-router.get('/src/Uploads/:filename', protect,fetchMonthlyReport);
 
 export default router;
