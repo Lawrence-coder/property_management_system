@@ -8,15 +8,15 @@ export const getMonthlyReport = async (propertyId, month, year) => {
       h.id AS house_id,
       h.house_number,
       h.house_type,
-      h.amount AS rent_price,
-      p.amount AS amount_paid,
+      h.amount AS rent_price, 
+      p.amount AS amount_paid, 
       p.receipt_path,
       p.status AS payment_status,
       /* If there's a payment record for this month, it's 'Paid', otherwise 'Unpaid' */
       CASE 
         WHEN p.id IS NOT NULL THEN 'Paid'
         ELSE 'Unpaid'
-      END AS house_status
+      END AS house_status /* This is a virtual column to easily determine payment status in the frontend*/
     FROM houses h
     LEFT JOIN payments p ON h.id = p.house_id 
       AND MONTH(p.created_at) = ? 
