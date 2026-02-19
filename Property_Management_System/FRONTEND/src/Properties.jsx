@@ -8,7 +8,7 @@ const Properties = () => {
     const fetchProperties = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:3000/api/properties", {
+        const res = await fetch("/api/properties", {
           headers: {Authorization: `Bearer ${token}`}
         });
 

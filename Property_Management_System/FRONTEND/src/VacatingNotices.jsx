@@ -15,7 +15,7 @@ const VacatingNotices = () => {
     if (window.confirm(confirmMessage)) {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:3000/api/vacatingNotices/approve/${requests.id}`, {
+        const res = await fetch(`/api/vacatingNotices/approve/${requests.id}`, {
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const VacatingNotices = () => {
     if (window.confirm(confirmMessage)) {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:3000/api/vacatingNotices/decline/${requests.id}`, {
+        const res = await fetch(`/api/vacatingNotices/decline/${requests.id}`, {
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ const VacatingNotices = () => {
    const fetchVacatingRequests = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/api/vacatingNotices", {
+      const res = await fetch("/api/vacatingNotices", {
         headers: {
           Authorization: `Bearer ${token}`
         }

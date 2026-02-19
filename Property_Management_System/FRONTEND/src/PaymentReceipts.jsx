@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react';
   useEffect(() => {
     const fetchProperties = async () => {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/api/addproperty/created", {
+      const res = await fetch("/api/addproperty/created", {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -32,7 +32,7 @@ import { useState, useEffect } from 'react';
         const token = localStorage.getItem("token");
         // FIX: Use filters object properties here
         const res = await fetch(
-          `http://localhost:3000/api/payments/monthly-report?propertyId=${filters.propertyId}&month=${filters.month}&year=${filters.year}`, 
+          `/api/payments/monthly-report?propertyId=${filters.propertyId}&month=${filters.month}&year=${filters.year}`, 
           {
             headers: { Authorization: `Bearer ${token}` }
           }

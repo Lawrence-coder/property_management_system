@@ -25,7 +25,7 @@ const Tenants = () => {
     if (window.confirm(confirmMessage)) {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:3000/api/users/deactivate/${tenant.id}`, {
+        const res = await fetch(`/api/users/deactivate/${tenant.id}`, {
           method: 'PUT',
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -44,7 +44,7 @@ const Tenants = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3000/api/users/${selectedTenant.id}`, {
+      const res = await fetch(`/api/users/${selectedTenant.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const Tenants = () => {
     const fetchUsersData = async () => {
       try {
         const token = localStorage.getItem("token"); 
-        const res = await fetch("http://localhost:3000/api/users", {
+        const res = await fetch("/api/users", {
           headers: { "Authorization": `Bearer ${token}` }
         });
         const data = await res.json();

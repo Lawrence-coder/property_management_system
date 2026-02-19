@@ -23,7 +23,7 @@ const RegisterForm = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/properties");
+        const res = await fetch("/api/properties");
         const data = await res.json();
         setProperties(Array.isArray(data) ? data : []);
         console.log("Fetched properties:", data);
@@ -61,7 +61,7 @@ const RegisterForm = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/houses/${propertyId}` // Fetch houses for selected property
+        `/api/houses/${propertyId}` // Fetch houses for selected property
       );
       const data = await res.json();
       setHouses(Array.isArray(data) ? data : []); // Ensure data is an array
@@ -84,7 +84,7 @@ const RegisterForm = () => {
     setLoading(true); 
 
     try {
-      const res = await fetch("http://localhost:3000/api/register", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

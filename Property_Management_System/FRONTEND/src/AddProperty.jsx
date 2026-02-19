@@ -20,7 +20,7 @@ useEffect(() => {
   const fetchAddedProperties = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/api/addproperty/created", {
+      const res = await fetch("/api/addproperty/created", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -63,7 +63,7 @@ const handlePropertySubmit = async (e) => {
 
   try {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:3000/api/addproperty", {
+    const res = await fetch("/api/addproperty", {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -95,7 +95,7 @@ const handleHouseSubmit = async (e) => {
 
   try {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:3000/api/addproperty/createunit", {
+    const res = await fetch("/api/addproperty/createunit", {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

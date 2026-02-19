@@ -10,7 +10,7 @@ const token = localStorage.getItem("token");
 
 
    const fetchRentPaymentDetails = async () => {
-   const res = await fetch("http://localhost:3000/api/rentPayment", {
+   const res = await fetch("/api/rentPayment", {
      headers: {
       Authorization: `Bearer ${token}`
      }
@@ -32,7 +32,7 @@ const submitPayment = async (e) => {
   formData.append("house_id", rentPaymentDetails.house_id); //append means to add key-value pairs to the FormData object which means we are adding the house_id, amount and receipt file to the form data
   formData.append("amount", rentPaymentDetails.amount);
   formData.append("receipt", file);
-  await fetch("http://localhost:3000/api/rentPayment", {
+  await fetch("/api/rentPayment", {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`

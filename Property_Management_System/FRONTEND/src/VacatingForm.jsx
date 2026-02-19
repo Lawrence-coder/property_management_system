@@ -12,7 +12,7 @@ const VacatingForm = () => {
     const token = localStorage.getItem("token");
     const fetchDetails = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/vacatingForm/details', {
+        const res = await fetch('/api/vacatingForm/details', {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -54,7 +54,7 @@ const VacatingForm = () => {
     if (!vacateDate) return alert("Please select a date.");
 
     const token = localStorage.getItem("token");
-    const res = await fetch('http://localhost:3000/api/vacatingForm/create', {
+    const res = await fetch('/api/vacatingForm/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

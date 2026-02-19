@@ -7,7 +7,7 @@ const Vacants = () => {
     const fetchVacantHouses = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:3000/api/vacants", {
+        const res = await fetch("/api/vacants", {
           headers: {
             Authorization: `Bearer ${token}`
           }
