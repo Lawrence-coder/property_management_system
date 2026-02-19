@@ -19,6 +19,8 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, '..', '..', 'FRONTEND', 'dist');
+console.log("Looking for frontend at:", frontendPath);
 
 const app = express(); //Creates an application instance 
 
@@ -27,6 +29,7 @@ app.use(express.json()); //parses incoming requests with JSON payloads
 app.use(bodyParser.json()); //allows backend to read the req.body(json) and form submissions
 app.use(express.urlencoded({ extended: true })) // to handle form submissions
 app.use(cors()); //Enables CORS for all routes
+
 
 
 //Handling Routes
@@ -43,6 +46,16 @@ app.use('/api/addproperty', addPropertiesRoutes);
 app.use('/api/vacants', vacantsRoutes);
 app.use('/api/payments', PaymentReceiptsRoutes);
 app.use('/src/Uploads', express.static(path.join(__dirname, 'Uploads')));
+app.use(express.static(frontendPath));
+
+app.get(/^(?!\/api).+/, (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
+// Handle React routing (important)
+//app.get("/*", (req, res) => {
+//  res.sendFile(path.join(__dirname, "../FRONTEND/dist/index.html"));
+//});
 
 
 //404 Handling Middleware- for routes that don't exist.
