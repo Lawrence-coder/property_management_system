@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apartmentImg from '../src/Uploads/manson-street-vancouver.webp';
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 const Login = () => {
 const navigate = useNavigate();
@@ -10,6 +11,8 @@ const navigate = useNavigate();
     email: "",
     password: ""
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
      setLoginDetails ({
@@ -70,7 +73,7 @@ const navigate = useNavigate();
        value={loginDetails.role}
        onChange={handleChange}
        required
-        className="border-2 p-2 rounded text-white bg-gray-800"
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800"
        >
         <option value="">Select Role</option>
         <option value="admin">Admin</option>
@@ -82,23 +85,34 @@ const navigate = useNavigate();
        <input
        type="email"
        name='email'
-       placeholder='Email'
+       placeholder='Enter email'
        value={loginDetails.email}
        onChange={handleChange}
        required
-       className="border-2 p-2 rounded text-white"
+       className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
-        <input
-        type='password'
+        <div className = "relative">
+          <input
+        type= {showPassword? "text" : "password"}
         name='password'
-        placeholder='Password'
+        placeholder='Enter password'
         value={loginDetails.password}
         onChange={handleChange}
         required
-        className="border-2 p-2 rounded text-white"
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
          />
-         <button type='submit' className="border-2 p-2 rounded bg-blue-950 hover:bg-blue-700">Login</button>
+
+         <button
+          type = "button"
+          onClick = {()=>setShowPassword(!showPassword)}
+          className="absolute inset-y-0 right-0 flex items-center pr-4 text-green-500 hover:text-green-700"
+         >
+          {showPassword ? <FaEye /> : <FaEyeSlash />}
+         </button>
+        </div>
+        
+         <button type='submit' className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 hover:bg-gray-900">Login</button>
          <p>Don't have an account? <a href="/Register" className="text-blue-400 hover:underline">Register</a></p>
       </form>
       </div>
