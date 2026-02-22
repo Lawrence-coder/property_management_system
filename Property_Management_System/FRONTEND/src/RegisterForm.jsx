@@ -1,6 +1,7 @@
 import {  useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apartmentImg from "../src/Uploads/manson-street-vancouver.webp";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 const RegisterForm = () => {
@@ -18,6 +19,8 @@ const RegisterForm = () => {
     property_id: "",
     house_id: ""
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   /* ---------------- FETCH PROPERTIES ON LOAD ---------------- */
   useEffect(() => {
@@ -133,49 +136,60 @@ const RegisterForm = () => {
         <input
           type="text"
           name="full_name"
-          placeholder="Full Name"
+          placeholder="Enter your full names"
           value={formData.full_name}
           onChange={handleChange}
           required
-          className="border-2 p-2 rounded text-white"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Enter email"
           value={formData.email}
           onChange={handleChange}
           required
-          className="border-2 p-2 rounded text-white"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <input
           type="tel"
           name="phone"
-          placeholder="Phone"
+          placeholder="Enter phone number"
           value={formData.phone}
           onChange={handleChange}
           required
-          className="border-2 p-2 rounded text-white"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-
-        <input
-          type="password"
+        
+        <div className = "relative">
+          <input
+          type={showPassword ? "text" : "password"}
           name="password"
-          placeholder="Password"
+          placeholder="Enter password"
           value={formData.password}
           onChange={handleChange}
           required
-          className="border-2 p-2 rounded text-white"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+
+        <button
+        type = "button"
+        className="absolute inset-y-0 right-0 flex items-center pr-4 text-green-500 hover:text-green-700"
+        onClick = {()=>setShowPassword(!showPassword)}
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </button>
+        </div>
+        
 
         {/* PROPERTY DROPDOWN */}
         <select
           value={formData.property_id}
           onChange={handlePropertyChange}
           required
-          className="border-2 p-2 rounded text-white bg-gray-800"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-900"
         >
           <option value="">Select Property</option>
           {properties.map((property) => (
@@ -193,7 +207,7 @@ const RegisterForm = () => {
 
           disabled={!houses.length}  // means no houses available so disable
           required
-          className="border-2 p-2 rounded text-white bg-gray-800"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-900"
         >
           <option value="">
             {houses.length ? "Select House" : "No vacant houses"}
@@ -208,9 +222,9 @@ const RegisterForm = () => {
         <button
           type="submit"
           disabled={loading} 
-          className="border-2 p-2 rounded bg-blue-950 hover:bg-blue-700"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 hover:bg-gray-900"
         >
-          {loading ? "Registering..." : "Register Tenant"}
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>
