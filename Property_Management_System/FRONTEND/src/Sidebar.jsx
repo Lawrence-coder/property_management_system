@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { Home, User, Settings, Menu, RectangleGogglesIcon } from "lucide-react";
+import { Home, User, Wrench, Menu, FileText, CreditCard } from "lucide-react";
 import { Link, Routes, Route } from "react-router-dom";
 import VacatingForm from "./VacatingForm.jsx";
 import HomePage from "./HomePage.jsx";
 import Profile from "./Profile.jsx";
 import RentPayment from "./RentPayment.jsx";
+import MaintenanceRequests from "./MaintenanceRequests.jsx";
 
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
      
       <div
         className={`${
@@ -34,17 +35,17 @@ const Sidebar = () => {
           </Link>
 
           <Link to="/TenantDashboard/RentPayment" className="flex items-center gap-3 hover:text-gray-300">
-            <RectangleGogglesIcon size={20} />
+            <CreditCard size={20} />
             {isOpen && <span>Rent Payment</span>}
           </Link>
           <Link to="/TenantDashboard/VacatingForm" className="flex items-center gap-3 hover:text-gray-300">
-            <RectangleGogglesIcon size={20} />
+            <FileText size={20} />
             {isOpen && <span>Vacating Form</span>}
           </Link>
 
-          <Link to="/Settings" className="flex items-center gap-3 hover:text-gray-300">
-            <Settings size={20} />
-            {isOpen && <span>Settings</span>}
+          <Link to="/TenantDashboard/MaintenanceRequests" className="flex items-center gap-3 hover:text-gray-300">
+            <Wrench size={20} />
+            {isOpen && <span>Maintenance Requests</span>}
           </Link>
         </nav>
       </div>
@@ -56,6 +57,7 @@ const Sidebar = () => {
         <Route path="Profile" element={<Profile />} />
         <Route path="RentPayment" element={<RentPayment />} />
         <Route path="VacatingForm" element={<VacatingForm />} />
+        <Route path="MaintenanceRequests" element={<MaintenanceRequests />} />
 
        </Routes>
        

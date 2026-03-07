@@ -7,7 +7,8 @@ import AddProperty from './AddProperty.jsx';
 import Properties from './Properties.jsx';
 import Vacants from './Vacants.jsx';
 import PaymentReceipts from './PaymentReceipts.jsx';
-// import ChangeHouse from './ChangeHouse.jsx';
+import AdminMaintenanceRequests from './AdminMaintenanceRequests.jsx';
+
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -51,9 +52,9 @@ const AdminSidebar = () => {
           {isOpen && <span>Payment Receipts</span>}
          </Link>
 
-         <Link to="/AdminDashboard/ChangeHouse" className="flex items-center gap-3 hover:text-gray-300">
+         <Link to="/AdminDashboard/AdminMaintenanceRequests" className="flex items-center gap-3 hover:text-gray-300">
           <HousePlugIcon size={20}/>
-          {isOpen && <span>Change House Request</span>}
+          {isOpen && <span>Maintenance Requests</span>}
          </Link>
         </nav>
      </div>
@@ -70,9 +71,9 @@ const AdminSidebar = () => {
              <Route path = "/Properties" element={<Properties />} />
               <Route path = "/AddProperty" element={<AddProperty />} />
               <Route path = "/Vacants" element={<Vacants />} />
-              <Route path = "VacatingNotices" element={<VacatingNotices />} />
+              <Route path = "/VacatingNotices" element={<VacatingNotices />} />
               <Route path = "/PaymentReceipts" element={<PaymentReceipts />} />
-              {/*<Route path = "/ChangeHouse" element={<ChangeHouse />} />*/}
+              <Route path = "/AdminMaintenanceRequests" element={<AdminMaintenanceRequests />} />
            </Routes>
         </div>
       </div>

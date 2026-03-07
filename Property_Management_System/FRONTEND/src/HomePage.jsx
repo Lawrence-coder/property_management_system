@@ -24,7 +24,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-200 p-6 lg:p-10">
+    <div className="h-screen bg-[#0f172a] text-slate-200 p-6 lg:p-10 overflow-y-auto">
       {/* 1. Company Identity & Hero */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
@@ -72,7 +72,7 @@ const HomePage = () => {
 
       {/* 3. What the Portal Helps You Do (Animated Cards) */}
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Portal Features</h3>
+        <h3 className="text-2xl font-bold text-white mb-2">Features</h3>
         <p className="text-slate-400 mb-8">Everything you need to manage your residency in one click.</p>
       </div>
 
@@ -86,7 +86,7 @@ const HomePage = () => {
         <FeatureCard 
           icon={<CreditCard className="text-emerald-400" />}
           title="Instant Rent Payment"
-          desc="Securely pay your rent via credit card or bank transfer without leaving your couch."
+          desc="Securely pay your rent via Mpesa, credit card or bank transfer without leaving your couch and send the receipt via the rent payment form."
           tag="Rent Payment"
         />
         <FeatureCard 

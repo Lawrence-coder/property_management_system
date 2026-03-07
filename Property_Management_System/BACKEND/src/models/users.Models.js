@@ -10,6 +10,7 @@ FROM users u
 LEFT JOIN tenancies t ON u.id = t.user_id
 LEFT JOIN houses h ON t.house_id = h.id
 LEFT JOIN properties p ON h.property_id = p.id
+ORDER BY u.created_at DESC
  `;
  const [rows] = await db.query(sql);
  return rows;
