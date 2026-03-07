@@ -31,7 +31,7 @@ CREATE TABLE tenancies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     house_id INT,
-    start_date DATETIME DEFAULT CURRENT_TIMESTAMP
+    start_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     end_date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (house_id) REFERENCES houses(id)
@@ -53,9 +53,22 @@ CREATE TABLE vacating_requests (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     house_id INT NOT NULL,
-    vacate_date DATE NOT NULL,
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (house_id) REFERENCES houses(id)
+);
+
+CREATE TABLE maintenance_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    house_id INT NOT NULL,
+    issue_description TEXT NOT NULL,
+    issue_date DATE NOT NULL,
+    status ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (house_id) REFERENCES houses(id)

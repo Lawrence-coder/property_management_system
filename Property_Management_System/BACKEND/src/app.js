@@ -14,6 +14,8 @@ import noticesRoutes from './routes/notices.Routes.js';
 import addPropertiesRoutes from './routes/addProperties.Routes.js';
 import vacantsRoutes from './routes/vacants.Routes.js';
 import PaymentReceiptsRoutes from './routes/paymentReceipts.Routes.js';
+import maintenanceRequestsRoutes from './routes/maintenanceRequests.Routes.js';
+import AdminMaintenanceRequestsRoutes from './routes/adminMaintenanceRequests.Routes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -45,6 +47,8 @@ app.use('/api/vacatingNotices', noticesRoutes);
 app.use('/api/addproperty', addPropertiesRoutes);
 app.use('/api/vacants', vacantsRoutes);
 app.use('/api/payments', PaymentReceiptsRoutes);
+app.use('/api/issues', maintenanceRequestsRoutes);
+app.use('/api/admin', AdminMaintenanceRequestsRoutes);
 app.use('/src/Uploads', express.static(path.join(__dirname, 'Uploads')));
 app.use(express.static(frontendPath));
 
