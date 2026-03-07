@@ -31,11 +31,13 @@ const Profile = () => {
    if (!profileData) return <p>Loading details.....</p>
 
   return (
-    <div>
-      <img className="relative" 
+    <div className="relative w-full h-screen">
+      <img className="absolute inset-0 w-full h-full object-cover" 
       src={apartmentImg}
       alt="Profile" />
-      <form className="flex flex-col gap-4 shadow-lg p-6 rounded-md bg-gray-900/90 text-white w-1/2 absolute top-18 right-45">
+
+      <div className="relative z-10 w-full h-full inset-0 bg-black/40 flex items-center justify-center">
+      <form className="flex flex-col gap-4 shadow-2xl p-8 rounded-lg bg-gray-900/90 text-white w-full max-w-150 border border-gray-700 max-h-[90vh] overflow-y-auto">
         <h2 className="text-xl font-bold">Profile</h2>
         
         <div className="flex flex-col gap-1">
@@ -91,6 +93,7 @@ const Profile = () => {
         </div>
 
       </form>
+      </div>
     </div>
   );
 };
