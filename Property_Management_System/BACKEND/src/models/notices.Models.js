@@ -16,6 +16,7 @@ export const fetchVacatingNotices = async () => {
  LEFT JOIN users u ON vr.user_id = u.id
  LEFT JOIN houses h ON vr.house_id = h.id
  LEFT JOIN properties p ON h.property_id = p.id
+ ORDER BY vr.created_at DESC
  `;
 
  const [rows] = await db.query(sql);
