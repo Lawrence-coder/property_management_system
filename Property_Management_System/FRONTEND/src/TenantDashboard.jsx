@@ -13,6 +13,7 @@ const TenantDashboard = () => {
   return (
     <div className="bg-white-200">
       <div className="flex flex-row justify-between items-center p-2">
+      <h1 className="text-yellow-800 font-bold text-2xl">ALLIANCE LIMITED</h1>
       <h1 className='text-green-700 font-bold mx-2 text-3xl bg-black-300 flex'>Tenant Dashboard</h1>
        <button onClick = {handleLogout} className="bg-green-500 text-white px-2 py-2 rounded hover:bg-green-900 flex font-bold">Logout</button>
        </div>
