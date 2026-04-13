@@ -1,4 +1,4 @@
-import { fetchTenantInfoById, createMaintenanceIssue } from "../models/maintenanceRequests.Models.js";
+import { fetchTenantInfoById, createMaintenanceIssue, resolveMaintenanceIssue } from "../models/maintenanceRequests.Models.js";
 
 export const getTenantInfo = async (req, res) => {
   try {
@@ -29,6 +29,20 @@ export const postMaintenanceIssue = async (req, res) => {
 
   res.status(201).json({message: "Maintenace request has been submitted successfully."})
   } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const resolvedIssue = async (req, res) => {
+  try {    
+    const {status} = req.body;
+    const {id} = req.params;
+
+    await resolveMaintenanceIssue(status, id);
+    res.json({ message: "Issue marked as resolved. Admin notified." });
+  }
+  catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };

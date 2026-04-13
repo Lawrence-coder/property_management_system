@@ -32,3 +32,13 @@ export const createMaintenanceIssue = async (userId, houseId, issueDescription) 
    `
    await db.query(sql, [userId, houseId, issueDescription])
 };
+
+export const resolveMaintenanceIssue = async (id, status) => {
+  const sql = `
+   UPDATE maintenance_requests 
+       SET status = 'resolved'
+       WHERE id = ? AND status = 'in_progress'
+  `
+  const [rows] = await db.query(sql, [status, id]);
+  return rows[0];
+};
