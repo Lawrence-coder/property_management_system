@@ -66,7 +66,7 @@ CREATE TABLE maintenance_requests (
     house_id INT NOT NULL,
     issue_description TEXT NOT NULL,
     issue_date DATE NOT NULL,
-    status ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+    status ENUM('pending', 'in_progress', 'resolved') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 

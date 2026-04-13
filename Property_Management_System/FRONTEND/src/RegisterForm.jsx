@@ -179,7 +179,7 @@ const RegisterForm = () => {
         className="absolute inset-y-0 right-0 flex items-center pr-4 text-green-500 hover:text-green-700"
         onClick = {()=>setShowPassword(!showPassword)}
         >
-          {showPassword ? <FaEyeSlash /> : <FaEye />}
+          {showPassword ? <FaEye /> : <FaEyeSlash />}
         </button>
         </div>
         
