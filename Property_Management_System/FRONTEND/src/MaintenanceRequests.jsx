@@ -31,6 +31,34 @@ const MaintenanceRequests = () => {
     fetchTenantInfo();
   }, []);
 
+  {/*--------Function to handle marking the issue as resolved and notifying the admin------*/}
+  const handleResolve = async (maintenance_requestsid, status) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/issues/resolve/${maintenance_requestsid}/status`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ status })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Issue marked as resolved. Admin notified.");
+      setIsInProgress(false);
+    } else {
+      alert(data.message || "Failed to resolve issue");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error resolving issue");
+  }
+};
+
   const handleChange = (e) => {
     setIssue({
       ...issue,
@@ -96,7 +124,7 @@ const MaintenanceRequests = () => {
 
       {isPending && (
             <div className="bg-amber-100 border-l-4 border-amber-500 text-amber-800 p-3 mb-2 rounded text-sm font-semibold">
-              ⚠️ Your issue is pending. An admin is working to assign a technician.
+              Your issue is pending. An admin is working to assign a technician.
             </div>
           )}
 
@@ -105,6 +133,17 @@ const MaintenanceRequests = () => {
                Your issue is in progress and a technician has been sent. After the issue has been resolved please notify the admin by clicking the resolved button.
             </div>
       )}
+
+      {isInProgress && (
+          <button
+            type="button"
+            onClick={handleResolve}
+            className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-3 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
+          >
+            Mark Issue as Resolved
+          </button>
+        )}
+
         {/* Full Name */}
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">

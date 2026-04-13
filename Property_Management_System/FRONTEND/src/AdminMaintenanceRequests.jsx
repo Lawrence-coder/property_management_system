@@ -4,6 +4,8 @@ import { BarChart3 } from "lucide-react";
 const AdminMaintenanceRequests = () => {
   const [issues, setIssues] = useState([]);
   const [frequency, setFrequency] = useState([]);
+  const [activeTab, setActiveTab] = useState("active");
+  const [archivedIssues, setArchivedIssues] = useState([]);
 
   useEffect(() => {
     fetchIssues();
@@ -19,7 +21,9 @@ const AdminMaintenanceRequests = () => {
         }
       });
       const data = await res.json();
-      setIssues(Array.isArray(data) ? data : []);
+      const allIssues = Array.isArray(data) ? data : [];
+      setIssues(allIssues.filter(issue => issue.status !== "resolved"));
+      setArchivedIssues(allIssues.filter(issue => issue.status === "resolved"));
     } catch (error) {
       console.error(error);
       setIssues([]);
@@ -51,7 +55,7 @@ const AdminMaintenanceRequests = () => {
           "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ status })
       });
 
       if (!res.ok) {
@@ -98,6 +102,31 @@ const AdminMaintenanceRequests = () => {
         </div>
       </div>
 
+      {/* Tab Navigation */}
+      <div className="flex gap-4 mb-6">
+  <button
+    onClick={() => setActiveTab("active")}
+    className={`px-4 py-2 rounded-lg font-semibold ${
+      activeTab === "active"
+        ? "bg-green-600 text-white"
+        : "bg-slate-700 text-slate-300"
+    }`}
+  >
+    Active Issues
+  </button>
+
+  <button
+    onClick={() => setActiveTab("archive")}
+    className={`px-4 py-2 rounded-lg font-semibold ${
+      activeTab === "archive"
+        ? "bg-green-600 text-white"
+        : "bg-slate-700 text-slate-300"
+    }`}
+  >
+    Archive
+  </button>
+</div>
+
       {/* Issues Table */}
       <div className="bg-white rounded-2xl border border-slate-700 overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
@@ -117,7 +146,7 @@ const AdminMaintenanceRequests = () => {
             </thead>
 
             <tbody>
-              {issues.map((issue) => (
+              {(activeTab === "active" ? issues : archivedIssues).map((issue) => (
                 <tr
                   key={issue.id}
                   className="border-t border-gray-900 hover:bg-gray-200/40 transition whitespace-nowrap"
@@ -140,16 +169,17 @@ const AdminMaintenanceRequests = () => {
                     >
                       <option value="pending">Pending</option>
                       <option value="in_progress">In Progress</option>
-                      <option value="resolved">Resolved</option>
                     </select>
                   </td>
                 </tr>
               ))}
 
-              {issues.length === 0 && (
+              {(activeTab === "active" ? issues : archivedIssues).length === 0 && (
                 <tr>
-                  <td colSpan="7" className="text-center py-10 text-slate-400">
-                    No maintenance requests found.
+                  <td colSpan="9" className="text-center py-10 text-slate-400">
+                    {activeTab === "active"
+                      ? "No active maintenance requests."
+                      : "No archived issues."}
                   </td>
                 </tr>
               )}
