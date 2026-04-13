@@ -26,7 +26,7 @@ export const fetchAllRequests = async (req, res) => {
 // Update issue status
 export const updateIssueStatus = async (id, status) => {
   const [result] = await db.query(
-    "UPDATE maintenance_requests SET status = ? WHERE id = ?",
+    "UPDATE maintenance_requests SET status = 'in_progress' WHERE id = ? ",
     [status, id]
   );
 

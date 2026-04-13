@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, Users, Building2, Building, DoorOpen, LogOut, Receipt, HousePlugIcon } from 'lucide-react';
+import { Menu, Users, Building2, Building, DoorOpen, LogOut, Receipt, Wrench } from 'lucide-react';
 import { Link, Routes, Route } from 'react-router-dom';
 import Tenants  from './Tenants.jsx';
 import VacatingNotices from './VacatingNotices.jsx';
@@ -53,7 +53,7 @@ const AdminSidebar = () => {
          </Link>
 
          <Link to="/AdminDashboard/AdminMaintenanceRequests" className="flex items-center gap-3 hover:text-gray-300">
-          <HousePlugIcon size={20}/>
+          <Wrench size={20}/>
           {isOpen && <span>Maintenance Requests</span>}
          </Link>
         </nav>
